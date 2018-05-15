@@ -1,0 +1,34 @@
+version: "3.1"
+
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - wordpress-net
+    environment:
+      MYSQL_ROOT_PASSWORD: wordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    volumes:
+      - wordpress-data:/var/www/html
+    networks:
+      - wordpress-net
+    ports:
+      - "8001:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_PASSWORD: wordpress
+
+volumes:
+  db-data:
+  wordpress-data:
+
+networks:
+  wordpress-net:
