@@ -206,24 +206,62 @@ Lab 2.1: Intro to Docker Volumes
 
 In this lab, we will learn more about Docker volumes.
 
-1. Host Volumes:
+1. Run a container with attached host volume:
 
 ```
-docker container run --rm -it -v /tmp:/myloc/tmp --name alpine alpine
+docker container run --rm -it -v /tmp:/myloc/tmp --name mycontainer alpine
+```
+The `-v` flag is for volume. What are the other new flags?
+
+2. Create a temporary file in the container and exit:
+
+```
 touch /myloc/tmp/test.txt
 exit
+```
+
+3. View the contents of `test.txt` on the host filesystem:
+
+```
 ls /tmp
 ```
 
-2. Named Volumes:
+4. View available Docker Volumes on your host:
+
 ```
 docker volume ls
+``` 
+
+5. Create a new Named volume:
+
+```
 docker volume create myvolume
+```
+
+6. Inspect your new volume:
+
+```
 docker volume inspect myvolume
-docker container run --rm -it -v myvolume:/myloc/tmp --name alpine alpine
+```
+Take note the `"Mountpoint"`.
+
+7. Run a new container with your Named volume mounted: 
+
+```
+docker container run --rm -it -v myvolume:/myloc/tmp --name mycontainer alpine
+```
+
+8. Create a temporary file in the container and exit:
+
+```
 touch /myloc/tmp/test.txt
 exit
-ls /var/lib/docker/volumes/myvolume/_data
+```
+
+9. View the contents of Volume "myvolume" on the host:
+
+```
+ls <mountpoint from step 6>/volumes/myvolume/_data
 ```
 
 Lab 2.2: Re-Run Nginx With Content
