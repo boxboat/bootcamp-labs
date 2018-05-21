@@ -201,10 +201,10 @@ Your container is now running again, but this time in the background.
 docker container ls
 ```
 
-Lab 2.1: Intro to Docker Volumes
+Lab 2.1: Docker Host Mounts
 -----------------------
 
-In this lab, we will learn more about Docker volumes.
+In this lab, we will learn how to use host mounts as a volume.
 
 1. Run a container with attached host volume:
 
@@ -226,45 +226,50 @@ exit
 ls /tmp
 ```
 
-4. View available Docker Volumes on your host:
+Lab 2.2: Docker Named Volumes
+-----------------------
+
+In this lab, we will learn how to use Docker Named volumes.
+
+1. View available Docker Volumes on your host:
 
 ```
 docker volume ls
 ``` 
 
-5. Create a new Named volume:
+2. Create a new Named volume:
 
 ```
 docker volume create myvolume
 ```
 
-6. Inspect your new volume:
+3. Inspect your new volume:
 
 ```
 docker volume inspect myvolume
 ```
 Take note the `"Mountpoint"`.
 
-7. Run a new container with your Named volume mounted: 
+4. Run a new container with your Named volume mounted: 
 
 ```
 docker container run --rm -it -v myvolume:/myloc/tmp --name mycontainer alpine
 ```
 
-8. Create a temporary file in the container and exit:
+5. Create a temporary file in the container and exit:
 
 ```
 touch /myloc/tmp/test.txt
 exit
 ```
 
-9. View the contents of Volume "myvolume" on the host:
+6. View the contents of Volume "myvolume" on the host:
 
 ```
 ls <mountpoint from step 6>/volumes/myvolume/_data
 ```
 
-Lab 2.2: Re-Run Nginx With Content
+Lab 2.3: Re-Run Nginx With Content
 ----------------------------------
 
 In this lab, we will run Nginx with the content of our local host directory.
@@ -276,7 +281,7 @@ In this lab, we will run Nginx with the content of our local host directory.
 
 Did it work? What happenend to the content that was already at the path /usr/share/nginx/html?
 
-Lab 2.3: Intro to Docker Networking
+Lab 2.4: Intro to Docker Networking
 -----------------------------------
 
 In this lab, we will get more practice with Docker networking.
@@ -300,7 +305,7 @@ $ apt-get install -y iputils-ping
 $ ping web1
 ```
 
-Lab 2.4: Exposing and Publishing Ports
+Lab 2.5: Exposing and Publishing Ports
 --------------------------------------
 
 In this lab, we will learn about exposing and publishing ports.
@@ -323,7 +328,7 @@ Run Nginx and let Docker choose a high port:
 For communication within the network, use the exposed port.
 For communication external to the network, use the published port.  
 
-Lab 2.5: Inter-container Communication
+Lab 2.6: Inter-container Communication
 -----------------------------------------
 
 Let's take what we've learned in Section 2 apply it in this lab. 
