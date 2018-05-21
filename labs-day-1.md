@@ -35,6 +35,8 @@ docker container ls
 docker container ls -a
 docker image ls
 ```
+Review your image and container listings before and after running the `hello-world` image. How have things changed?
+
 Lab 1.2 Terminal Access
 ---------------------------------------------
 1. Create a container using the Ubuntu 16.04 image and connect to STDIN and a terminal:
