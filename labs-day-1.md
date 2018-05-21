@@ -368,30 +368,56 @@ ping centos1
 ping centos2
 ```
 
-Lab 2.6 Exposing and Publishing Ports
+Lab 2.6 Manual Port Mapping
 --------------------------------------
 
-In this lab, we will learn about exposing and publishing ports.
-After you run each container, look at how the ports are exposed.
+In this lab, we will learn about manually exposing and publishing ports.
 
 1. Exposing Ports  
 Run NGINX without any port mapping:  
-`docker container run -d --name nginx-exposed nginx`  
+```
+docker container run -d --name nginx-exposed nginx
+```
 
-2. Publishing Ports  
+2. Show nginx exposed port 80:
+
+```
+docker container ls -a
+```
+Why can't we access it?
+
+3. Run an nginx container and map port 80 on the container to port 8080 on your host. Map port 443 on the container to port 4443 on the host:
+
+```
+docker container run -d -p 8080:80 -p 4443:443 nginx
+```
+
+4. Verify open ports:
+
+```
+docker container ls
+```
+
+Lab 2.7 Auto Port Mapping
+---------------------------- 
+
+1. Publishing Ports  
 Run Nginx and let Docker choose a high port:  
 `docker container run -d -p 80 --name nginx-high nginx`  
 
-3. Run Nginx and choose the high port: 
-`docker container run -d -p 8080:80 --name nginx-user nginx`  
-
-4. Run Nginx and let Docker determine exposed ports and mapping: 
+2. Run Nginx and let Docker determine exposed ports and mapping: 
 `docker container run -d -P --name nginx-auto nginx`
+
+3. Show open ports:
+
+```
+docker container ls
+```
 
 For communication within the network, use the exposed port.
 For communication external to the network, use the published port.  
 
-Lab 2.7 Inter-container Communication
+Lab 2.8 Inter-container Communication
 -----------------------------------------
 
 Let's take what we've learned in Section 2 apply it in this lab. 
