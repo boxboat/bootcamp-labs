@@ -231,7 +231,7 @@ Lab 2.2: Re-Run Nginx With Content
 
 In this lab, we will run Nginx with the content of our local host directory.
 
-1. Create a new directory "content" with file "index.html" on your host. Add some test to the file ("hello" maybe?).
+1. Create a new directory "content" with file "index.html" on your host. Add some text to the file ("hello" maybe?).
 
 2. Run NGINX container using a host volume mount
 `docker container run -P -d -v $(pwd)/content:/usr/share/nginx/html nginx`
