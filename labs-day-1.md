@@ -281,31 +281,94 @@ In this lab, we will run Nginx with the content of our local host directory.
 
 Did it work? What happenend to the content that was already at the path /usr/share/nginx/html?
 
-Lab 2.4: Intro to Docker Networking
+Lab 2.4: Exploring the Default Bridge Network
 -----------------------------------
 
-In this lab, we will get more practice with Docker networking.
+1. Make sure there are no existing containers running:
 
-1. Create a user-defined network:
+`docker container rm $(docker container ls -qa)`
+
+2. Launch a Centos container called "centos1" in detached mode:
+
+```
+docker container run -d - it --name centos1 centos
+```
+
+3. Inspect the bridge network and note the container IP address:
+
+```
+docker network inspect bridge
+```
+If you look at the "Containers" filed you will find the IPv4 address.
+
+4. Launch another Centos container called "centos2" and get terminal access:
+
+```
+docker container run -it --name centos2 centos bash
+```
+
+5. Ping your "centos1" container using the IP address from Step 3.
+
+```
+ping <ip address>
+```
+
+6. Try and ping "centos1" using the container name:
+
+```
+ping centos1
+```
+It doesn't work!
+
+Lab 2.5: Create a bridge network
+-----------------------------------
+
+1. Create a new bridge network called "my_bridge":
+
+```
+docker network create --driver bridge my_bridge
+```
+
+2. Verify and inspect your new network:
+
 ```
 docker network ls
-docker network create -d bridge test
-docker network inspect test
-docker network ls
+docker network inspect my_bridge
 ```
 
-2. Put 2 containers on the same bridge network so they can communicate via DNS
+3. Launch a Centos container in the background on your "my_bridge" network named "centos3":
 
 ```
-docker container run --network test -d --name web1 nginx
-docker container run --network test -it --name web2 ubuntu bash
-
-$ apt-get update
-$ apt-get install -y iputils-ping
-$ ping web1
+docker container run -d -it --network my_bridge --name centos3 centos
 ```
 
-Lab 2.5: Exposing and Publishing Ports
+4. Launch another Centos container on your "my_bridge" network and connect to it:
+
+```
+docker container run -it --network my_bridge --name centos4 centos
+```
+
+5. Open the `/etc/hosts` file:
+
+```
+cat /etc/hosts
+```
+Do you see centos3? Why didn't we in the previous exercise?
+
+6. Ping "centos3" using the container name:
+
+```
+ping centos3
+```
+
+7. Ping "centos1" and "centos2" using the container name:
+
+```
+ping centos1
+ping centos2
+```
+
+Lab 2.6 Exposing and Publishing Ports
 --------------------------------------
 
 In this lab, we will learn about exposing and publishing ports.
@@ -328,7 +391,7 @@ Run Nginx and let Docker choose a high port:
 For communication within the network, use the exposed port.
 For communication external to the network, use the published port.  
 
-Lab 2.6: Inter-container Communication
+Lab 2.7 Inter-container Communication
 -----------------------------------------
 
 Let's take what we've learned in Section 2 apply it in this lab. 
