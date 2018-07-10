@@ -429,7 +429,7 @@ Lab 3.1: Build a Simple Python App
 
 In this lab, we will build a very simple python application.
 
-1. Go to bootcamp-dotcms/simple-python-app
+1. Go to bootcamp/simple-python-app
 
 2. Execute the following to build the Docker Image:
 
