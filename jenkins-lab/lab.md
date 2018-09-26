@@ -1,4 +1,4 @@
-# Install Jenkins
+## Install Jenkins
 
 1. Create New Instance   http://play.boxboat.net
 2. Start Jenkins with docker access ```docker run --name jenkins --rm -d -p 8081:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -v /usr/local/bin/docker:/usr/bin/docker -u root jenkins/jenkins```
@@ -6,7 +6,7 @@
 4. Install reccomended plugins
 
 
-# First Pipeline
+## First Pipeline
 
 In this section you will be creating your first pipeline.  It is a simple job that will echo "Hello World" to the output console.
 
@@ -28,7 +28,7 @@ Click Save
 
 Pipeline should have completed successfully.  View the logs by clicking on #1 on the left
 
-# Multiple steps
+## Multiple steps
 ```
 pipeline {
     agent any
@@ -46,7 +46,7 @@ pipeline {
 }
 ```
 
-# Docker Agents
+## Docker Agents
 
 ```
 pipeline {
@@ -61,7 +61,7 @@ pipeline {
 }
 ```
 
-# Environment Variables
+## Environment Variables
 
 ```
 pipeline {
