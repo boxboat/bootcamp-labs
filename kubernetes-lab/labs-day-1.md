@@ -1,10 +1,9 @@
 # Labs
 ## 1. Initialize Kubernetes
+
 ```
-# https://gist.github.com/yogeek/e0dc5e16e158815e7bbb77b896cad3c6#file-fig-play-with-k8s-sh
-$ curl -L -o kube-init.sh https://gist.githubusercontent.com/yogeek/e0dc5e16e158815e7bbb77b896cad3c6/raw/f5fb79b1babe65f45bd69484db8c5bf12c464311/fig-play-with-k8s.sh
-$ chmod +x kube-init.sh
-$ ./kube-init.sh
+$ minikube start
+$ minikube addons enable ingress
 ```
 
 ## 2. The CLI
