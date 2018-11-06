@@ -185,13 +185,13 @@ Make `api-configmap.yaml`
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: api_config
+  name: api-config
 data:
   endpoint: api.boxboat.net
   port: "80"
 ```
 ```
-kubectl apply -f api-configmap.json
+kubectl apply -f api-configmap.yaml
 ```
 ### 4.2. Create a secret
 Create base64 encoded values for a username/password
@@ -214,10 +214,10 @@ data:
   password: cGFzc3dvcmQ=
 ```
 ```
-kubectl apply -f api-secrets.json
+kubectl apply -f api-secrets.yaml
 ```
 
-### 4.3. Use the ConifgMap and Secret
+### 4.3. Use the ConfigMap and Secret
 Create pod-config.yaml
 ```
 apiVersion: v1
