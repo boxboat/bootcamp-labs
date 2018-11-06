@@ -267,7 +267,7 @@ Environment:
 
 Read the data from the container:
 ```
-$ kubectl exec -it nginx -- eng | grep API
+$ kubectl exec -it nginx -- env | grep API
 API_PORT=80
 API_USER=admin
 API_PASS=password
@@ -276,7 +276,7 @@ API_ENDPOINT=api.boxboat.net
 
 ## 5. Create a Deployment
 ```
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-deployment
